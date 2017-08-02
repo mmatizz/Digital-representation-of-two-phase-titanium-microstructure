@@ -5,7 +5,6 @@
 #include <glad/glad.h>
 #include "Vertex.h"
 
-class Shader;
 
 class Seed
 {

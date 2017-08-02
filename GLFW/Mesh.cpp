@@ -6,37 +6,19 @@ Mesh::Mesh(std::vector<Seed> seeds)
 {
 	this->seeds = seeds;
 
-	
-//	for(int i=0, j=0; i< seeds.size(); i++)
-//	{
-////		vertex[j++] = seeds[i].getPositionX();
-////		vertex[j++] = seeds[i].getPositionY();
-////
-////		vertex[j++] = seeds[i].getColorR();
-////		vertex[j++] = seeds[i].getColorG();
-////		vertex[j++] = seeds[i].getColorB();
-//
-//
-//		vertex[j++] = 0 + 0.01*i;
-//		vertex[j++] = 0;
-//
-//		vertex[j++] = 255;
-//		vertex[j++] = 255;
-//		vertex[j++] = 255;
-//	}
+	vertex = new float[seeds.size() * 5];
+	for(int i=0, j=0; i< seeds.size(); i++)
+	{
+		vertex[j++] = seeds[i].getPositionX();
+		vertex[j++] = seeds[i].getPositionY();
 
-	vertex = new float[10];
-	vertex[0] = 0.0f;
-	vertex[1] = 0.1f;
-	vertex[2] = 1.0f;
-	vertex[3] = 0.0f;
-	vertex[4] = 1.0f;
+		vertex[j++] = seeds[i].getColorR();
+		vertex[j++] = seeds[i].getColorG();
+		vertex[j++] = seeds[i].getColorB();
 
-	vertex[5] = 0.0f;
-	vertex[6] = 0.5f;
-	vertex[7] = 1.0f;
-	vertex[8] = 0.0f;
-	vertex[9] = 0.0f;
+	}
+
+
 
 	setupMesh();
 }
@@ -54,7 +36,7 @@ void Mesh::setupMesh()
 	glGenBuffers(1, &VBO);
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, seeds.size() * 5 * sizeof(float), vertex, GL_STATIC_DRAW);
 
 	// vertex positions
 	glEnableVertexAttribArray(0);
@@ -69,5 +51,5 @@ void Mesh::setupMesh()
 void Mesh::Draw(Shader shader)
 {
 	glBindVertexArray(VAO);
-	glDrawArrays(GL_POINTS, 0, 2);
+	glDrawArrays(GL_POINTS, 0, seeds.size());
 }

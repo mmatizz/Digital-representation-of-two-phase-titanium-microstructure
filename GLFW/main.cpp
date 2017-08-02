@@ -94,10 +94,10 @@ int main()
 	std::vector<Seed> seeds;
 	for (int i = 0; i < 5; i++)
 	{
-		offset += 0.1f;
+		offset += 0.05f;
 		pos_x = -0.1f + offset;
 		pos_y = 0.1f;
-		seeds.push_back(* new Seed(pos_x, pos_y, 255, 255, 255));
+		seeds.push_back(* new Seed(pos_x, pos_y, 1.0f, 0.0f, 0.0f));
 	}
 
 	Mesh* mesh = new Mesh(seeds);
@@ -109,7 +109,7 @@ int main()
 	{
 		// render
 		// ------
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// draw 100 instanced quads

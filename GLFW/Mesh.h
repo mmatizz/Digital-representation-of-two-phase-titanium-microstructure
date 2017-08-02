@@ -3,6 +3,8 @@
 #include <vector>
 #include "Seed.h"
 
+class Shader;
+
 class Mesh
 {
 public:
