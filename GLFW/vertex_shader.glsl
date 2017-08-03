@@ -7,7 +7,8 @@ out vec3 fColor;
 
 void main()
 {
-	gl_PointSize = 2.0;
-    gl_Position = vec4(aPos, 0.0, 1.0);
+	vec2 position = { aPos[0]/500, aPos[1]/500 };
+	gl_PointSize = 96.0;
+    gl_Position = vec4(position, 0.0, 1.0);
     fColor = aColor;
 }  

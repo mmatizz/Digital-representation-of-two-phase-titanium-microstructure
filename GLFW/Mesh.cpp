@@ -15,7 +15,6 @@ Mesh::Mesh(std::vector<Seed> seeds)
 		vertex[j++] = seeds[i].getColorR();
 		vertex[j++] = seeds[i].getColorG();
 		vertex[j++] = seeds[i].getColorB();
-
 	}
 
 

@@ -10,8 +10,8 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 // settings
-const unsigned int SCR_WIDTH = 1280;
-const unsigned int SCR_HEIGHT = 720;
+const unsigned int SCR_WIDTH = 500;
+const unsigned int SCR_HEIGHT = 500;
 
 int main()
 {
@@ -90,14 +90,31 @@ int main()
 	//	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	//	glVertexAttribDivisor(2, 1); // tell OpenGL this is an instanced vertex attribute.
 
-	float offset = 0, pos_x = 0, pos_y = 0;
+	int count_x = 100;
+	int count_y = 100;
+
+	float width = (SCR_WIDTH*2) / count_x;
+	float height = (SCR_HEIGHT*2) / count_y;
+
+	float average_size = (width + height) / 2;
+
+	float pos_x = SCR_WIDTH * (-1.0f);
+	float pos_y = SCR_HEIGHT - average_size;
+
+	float color = 0.0f;
+
 	std::vector<Seed> seeds;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < count_y; i++)
 	{
-		offset += 0.05f;
-		pos_x = -0.1f + offset;
-		pos_y = 0.1f;
-		seeds.push_back(* new Seed(pos_x, pos_y, 1.0f, 0.0f, 0.0f));
+		for (int j = 0; j < count_x; j++) {
+			pos_x += average_size;
+			seeds.push_back(*new Seed(pos_x, pos_y, 1.0f, 0.0f + color, 0.0f));
+		}
+
+		pos_x = SCR_WIDTH * (-1.0f);
+		pos_y -= average_size;
+
+
 	}
 
 	Mesh* mesh = new Mesh(seeds);

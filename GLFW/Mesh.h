@@ -18,8 +18,6 @@ public:
 
 	void Draw(Shader shader);
 
-	void BuildMesh(int meshSize);
-
 private:
 	// DATA
 	GLuint VAO, VBO;
