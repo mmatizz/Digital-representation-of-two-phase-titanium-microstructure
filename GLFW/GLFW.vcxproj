@@ -149,15 +149,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Dimensions.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Moore.cpp" />
+    <ClCompile Include="Neighbourhood.cpp" />
     <ClCompile Include="Seed.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dimensions.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Moore.h" />
+    <ClInclude Include="Neighbourhood.h" />
     <ClInclude Include="Seed.h" />
+    <ClInclude Include="SeedState.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
