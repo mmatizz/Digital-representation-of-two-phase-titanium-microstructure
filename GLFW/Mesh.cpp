@@ -17,15 +17,16 @@ Mesh::Mesh(Dimensions *dimensions, Shader shader)
 	ClearMesh();
 	GenerateSeeds();
 	UpdateMesh();
-	SetupMesh();
+	SetupSeeds();
 }
 
-void Mesh::SetupMesh()
+void Mesh::SetupSeeds()
 {
+	//SEEDS
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &VBO_SEED);
 	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_SEED);
 	glBufferData(GL_ARRAY_BUFFER, seeds.size() * 5 * sizeof(float), vertex, GL_STATIC_DRAW);
 
 	// vertex positions
@@ -34,7 +35,6 @@ void Mesh::SetupMesh()
 	// vertex colors
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5* sizeof(float), (void*)(2 * sizeof(float)));
-
 
 	glBindVertexArray(0);
 }
@@ -119,7 +119,7 @@ void Mesh::GenerateSeeds()
 
 	//generating random positions
 	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distribution(1, 250000);
+	std::uniform_int_distribution<int> distribution(0, dimensions->countSeeds_width*dimensions->countSeeds_height - 1);
 
 
 	for (int i = 0; i < 50; i++)
@@ -135,6 +135,8 @@ void Mesh::GenerateSeeds()
 	}
 }
 
+
+
 bool Mesh::IsPopulated()
 {
 	for(int i=0; i<seeds.size(); i++)
@@ -146,6 +148,55 @@ bool Mesh::IsPopulated()
 	return true;
 }
 
+
+void Mesh::SetupEllipses()
+{
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO_ELLIPSE);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_ELLIPSE);
+	glBufferData(GL_ARRAY_BUFFER, ellipses.size() * 5 * sizeof(float), ellipses_vertex, GL_STATIC_DRAW);
+
+	// ellipse positions
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	// ellipse colors
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
+
+	glBindVertexArray(0);
+}
+
+void Mesh::GenerateEllipses()
+{
+	ellipses.push_back(*new Ellipse_Titanium(0, 0, 0.0f, 0.0f));
+
+	this->ellipses_vertex = new float[ellipses.size() * 5];
+}
+
+void Mesh::UpdateEllipses()
+{
+	for (int i = 0, j = 0; i < ellipses.size(); i++)
+	{
+		ellipses_vertex[j++] = ellipses[i].getPositionX();
+		ellipses_vertex[j++] = ellipses[i].getPositionY();
+
+		ellipses_vertex[j++] = ellipses[i].getColorR();
+		ellipses_vertex[j++] = ellipses[i].getColorG();
+		ellipses_vertex[j++] = ellipses[i].getColorB();
+
+	}
+}
+
+void Mesh::DrawEllipses(Shader shader)
+{
+	glUniform1f(seedSizeUniformLocation, seedSize);
+	glBindVertexArray(VAO);
+	glDrawArrays(GL_POINTS, 0, ellipses.size());
+}
+
 Mesh::~Mesh()
 {
 }
+
+

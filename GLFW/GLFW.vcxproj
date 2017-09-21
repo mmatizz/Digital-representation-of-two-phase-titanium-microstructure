@@ -150,16 +150,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dimensions.cpp" />
+    <ClCompile Include="Ellipse_Titanium.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainRun.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Moore.cpp" />
     <ClCompile Include="Neighbourhood.cpp" />
     <ClCompile Include="Seed.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dimensions.h" />
+    <ClInclude Include="Ellipse_Titanium.h" />
+    <ClInclude Include="MainRun.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Moore.h" />
     <ClInclude Include="Neighbourhood.h" />

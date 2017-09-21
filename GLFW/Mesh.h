@@ -3,6 +3,8 @@
 #include <vector>
 #include "Seed.h"
 #include "Dimensions.h"
+#include "Ellipse_Titanium.h"
+
 
 class Shader;
 
@@ -11,7 +13,9 @@ class Mesh
 public:
 	// DATA
 	std::vector<Seed> seeds;
+	std::vector<Ellipse_Titanium> ellipses;
 	float *vertex;
+	float *ellipses_vertex;
 
 	Dimensions* dimensions;
 	GLfloat seedSize;
@@ -27,17 +31,26 @@ public:
 	~Mesh();
 
 	void Draw(Shader shader);
-	void SetupMesh();
 	void ClearMesh();
 	void UpdateMesh();
+
+	void SetupSeeds();
 	void PopulateSeeds();
 	void GenerateSeeds();
+	
+	void SetupEllipses();
+	void GenerateEllipses();
+	void UpdateEllipses();
+
+	void DrawEllipses(Shader shader);
+
 	bool IsPopulated();
 
 
 private:
 	// DATA
-	GLuint VAO, VBO;
+	GLuint VAO, VBO_SEED;
+	GLuint VAO_ELLIPSE, VBO_ELLIPSE;
 
 	// FUNCTIONS
 

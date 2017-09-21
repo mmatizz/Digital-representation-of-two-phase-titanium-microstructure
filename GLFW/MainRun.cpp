@@ -1,20 +1,17 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm/glm.hpp>
+#include "MainRun.h"
 
 
-#include <iostream>
-#include "Shader.h"
-#include "Mesh.h"
-#include "Dimensions.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+MainRun::MainRun()
+{
+}
 
-// settings
-const static unsigned int SCR_WIDTH = 1000;
-const static unsigned int SCR_HEIGHT = 1000;
 
-int main()
+MainRun::~MainRun()
+{
+}
+
+int MainRun::runOpenGL()
 {
 	// glfw: initialize and configure
 	// ------------------------------
@@ -82,7 +79,9 @@ int main()
 
 			mesh->Draw(shader);
 
+
 		}
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -93,24 +92,3 @@ int main()
 	glfwTerminate();
 	return 0;
 }
-
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	// make sure the viewport matches the new window dimensions; note that width and 
-	// height will be significantly larger than specified on retina displays.
-	glViewport(0, 0, width, height);
-}
-
-//void makeEllipse(float radiusX, float radiusY)
-//{
-//	for (int i = 0; i < 360; i++)
-//	{
-//		float rad = i*DEG2RAD;
-//		ellipse_vertices[i] = glm::vec4(cos(rad)*radiusX,
-//			sin(rad)*radiusY, 0, 1);
-//	}
-//}
-//
-//glDrawArrays(GL_TRIANGLE_STRIP, 0, numEllipsisVertices);

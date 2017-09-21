@@ -20,7 +20,6 @@ public:
 	void setNewColor(float r, float g, float b) { newColor1[0] = r; newColor1[1] = g; newColor1[2] = b; }
 	void setPosition(glm::vec2 position) { vertex.Position = position; }
 
-
 	float getPositionX() { return vertex.Position[0]; }
 	float getPositionY() { return vertex.Position[1]; }
 
